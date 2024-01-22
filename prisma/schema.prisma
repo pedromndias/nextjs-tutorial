@@ -1,0 +1,21 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Task {
+  id String @id @default(uuid()) // Note the "@" so we set id as the primary key.
+  content String
+  createdAt DateTime @default(now())
+  completed Boolean @default(false)
+}
+
+// We will use the "npx prisma migrate dev" command while we are working locally, so we can track and apply the schema changes. Note that this command is not suitable for production.
+// "npx prisma studio" will open localhost:5555 with a GUI to check our models and collections.
